@@ -17,6 +17,7 @@ import argparse
 import ast
 import csv
 from pathlib import Path
+import time
 
 import numpy as np
 import torch
@@ -369,6 +370,8 @@ def main(llm_model, runner, input_text, args):
     prompt_template = None
     if args.use_prompt_template and model_name in DEFAULT_PROMPT_TEMPLATES:
         prompt_template = DEFAULT_PROMPT_TEMPLATES[model_name]
+    prompt_template = DEFAULT_PROMPT_TEMPLATES['InternLMForCausalLM']
+    print(prompt_template)
     batch_input_ids = parse_input(tokenizer=tokenizer,
                                   input_text=input_text,
                                   prompt_template=prompt_template,
@@ -556,7 +559,7 @@ if __name__ == '__main__':
     if not args.use_py_session:
         runner_kwargs.update(
             max_batch_size=1,
-            max_input_len=20,
+            max_input_len=200,
             max_output_len=args.max_output_len,
             max_beam_width=args.num_beams,
             max_attention_window_size=args.max_attention_window_size,
@@ -566,6 +569,11 @@ if __name__ == '__main__':
     
     while True:
         input_text = input("Speaker: ")
+        start_time = time.time()
         main(llm_model, runner, input_text, args)
+        end_time = time.time()
+        
+        time_taken = end_time - start_time
+        print(f"Time taken by main function: {time_taken:.2f} seconds")
         
         

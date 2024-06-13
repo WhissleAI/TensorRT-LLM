@@ -85,9 +85,9 @@ This section provides instructions to retrieve and launch a Docker container wit
 
 To obtain and start the basic Docker image environment, run the following command:
 
-```sh
+```
 docker run --rm --runtime=nvidia --gpus all --entrypoint /bin/bash -it nvidia/cuda:12.4.0-devel-ubuntu22.04
-```sh
+```
 
 
 ## Community

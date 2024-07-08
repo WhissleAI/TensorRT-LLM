@@ -113,7 +113,7 @@ class MultiModalModel:
 
     def init_image_encoder(self):
         vision_encoder_path = os.path.join(self.args.visual_engine_dir,
-                                           'visual_encoder.engine')
+                                           'visual_encoder_fp16.engine')
         logger.info(f'Loading engine from {vision_encoder_path}')
         with open(vision_encoder_path, 'rb') as f:
             engine_buffer = f.read()
